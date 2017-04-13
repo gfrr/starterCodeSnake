@@ -14,7 +14,8 @@ function Game(options){
 Game.prototype.drawSnake = function() {
   this.snake.body.forEach(function(position, index) {
     var selector = "[data-row=" + position.row + "][data-column=" + position.column + "]";
-    (index === 0) ? $(selector).addClass("snake snake-head") : $(selector).addClass("snake");
+    //added a class to distinguish the head
+    index === 0 ? $(selector).addClass("snake snake-head") : $(selector).addClass("snake");
 
   });
 };
@@ -37,6 +38,31 @@ Game.prototype.update = function(){
 };
 
 
+Game.prototype.assignControlToKeys = function(){
+  $("body").on("keydown", function(e){
+    switch(e.keyCode){
+      case 37:
+      this.snake.goLeft();
+      break;
+
+      case 38:
+      this.snake.goUp();
+      break;
+
+      case 39:
+      this.snake.goRight();
+      break;
+
+      case 40:
+      this.snake.goDown();
+      break;
+
+      default:
+      break;
+    }
+  }.bind(this));
+};
+
 
 
 $(document).ready(function(){
@@ -45,6 +71,7 @@ $(document).ready(function(){
     columns: 50,
     snake: new Snake(),
   });
+  game.assignControlToKeys();
   game.drawSnake();
   game.start();
 });

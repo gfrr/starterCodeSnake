@@ -19,10 +19,12 @@
 
 .snake {
   background-color: #95BE69;
+
 }
 
 .snake-head {
   background-color: #6b983a;
+  border-radius: 20%;
 }
 
 .food {
